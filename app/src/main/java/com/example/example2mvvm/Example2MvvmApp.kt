@@ -4,4 +4,4 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class Example2MvvmApp: Application()
+class Example2MvvmApp : Application()
