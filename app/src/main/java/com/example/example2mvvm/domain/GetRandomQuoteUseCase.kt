@@ -1,20 +1,17 @@
 package com.example.example2mvvm.domain
 
-import com.example.example2mvvm.data.model.QuoteModel
-import com.example.example2mvvm.data.model.QuoteProvider
+import com.example.example2mvvm.data.QuoteRepository
+import com.example.example2mvvm.domain.model.Quote
 import javax.inject.Inject
 
-class GetRandomQuoteUseCase @Inject constructor(private val quoteProvider: QuoteProvider) {
+class GetRandomQuoteUseCase @Inject constructor(private val repository: QuoteRepository) {
 
-    operator fun invoke(): QuoteModel? {
-        // Caso de uso que recupera una lista de quotes
-        val quotes = quoteProvider.quotes
-        //Si no es nulo ni vacio, genera numero random entre el tamaño de quotes y retorna uno random
+    suspend operator fun invoke(): Quote? {
+        val quotes = repository.getAllQuotesFromDatabase()
         if (!quotes.isNullOrEmpty()) {
             val randomNumber = (0..quotes.size - 1).random()
-            return quotes[3]
+            return quotes[randomNumber]
         }
-        //Si no, retorna un nulo
         return null
     }
 }
